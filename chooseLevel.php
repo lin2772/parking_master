@@ -37,7 +37,7 @@ session_start();
 
       ?>
     </select>
-    <br><input type="submit" value="Continue"></br>
+    <br><input type="submit" value="Submit"></br>
   </form>
   </p>
 </body>

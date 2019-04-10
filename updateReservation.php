@@ -38,3 +38,14 @@
     echo "Error in reserving parking space. <br>";
   }
  ?>
+ <html>
+ <head>
+ <title>Reservation Submit!</title>
+ </head>
+ <body>
+   <p>
+   <form action="customerPage.php">
+     <br><input type="submit" value="Back to Homepage"></br>
+   </form>
+ </body>
+ </html>
