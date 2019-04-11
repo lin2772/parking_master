@@ -2,16 +2,14 @@
 	session_start();
 	$USERNAME = $_SESSION["login"];
 
-	$NAME = $_POST["EventName"];
-	//$VENUENAME = $_POST["VenueName"];
-	$DATE = $_POST["EventDate"];
-	//$DATERESERVED = date('Y-m-d');
-	//$EVENTPRICE = $_POST["EventPrice"];
-	//$GARAGENAME = $_POST["GarageName"];
-	//$LEVELNUM = $_POST["LevelNum"];
-	$NEWDATE = $_POST["NewOldDate"];
+	$EVENTNAME = $_POST["EventName"];
+	$VENUENAME = $_POST["VenueName"];
+	$EVENTATE = $_POST["EventDate"];
+	
+	$OLDEVENTNAME = $_POST["OldEventName"];
+	$NEWEVENTDATE = $_POST["NewEventDate"];
 
-	if(empty($NAME))
+	if(empty($EVENTNAME) && empty($OLDEVENTNAME))
 	{
 		echo "Missing information!";
 	}
@@ -22,11 +20,19 @@
 		die('Could not connect'.mysqli_connect_error());
 	}
 
-	if(empty($NEWDATE))
+	if(empty($NEWEVENTDATE))
 	{
+		for($x=0;$x<=88888888;$x++){
+	       $sql_eventid="select eventid from EVENT where eventid=$x";
+	       $result_cid=mysqli_query($con, $sql_cid) or die( mysqli_error($con));
+	       if(mysqli_num_rows($result_cid)==0){
+	         $CUSTOMERID= $x;
+	        break;
+	        }
+	     }
 		$sql_insert = "INSERT into EVENT(
-			Name, Date) values 
-			( '$Name', '$Date')";
+			eventid, eventname, venueid) values 
+			( '$EVENTNAME', '$VENUENAME')";
 			if(mysqli_query($con,$sql_insert))
 			{
 				echo "Event added successfully";

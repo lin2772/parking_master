@@ -1,5 +1,5 @@
 <?php
-	$USERNAME = $_POST["Username"];
+	$USERNAME = trim($_POST["Username"]);
  	$PASSWORD = $_POST["Password"];
   	$ADMIN = (isset($_POST["Admin"]))? 1:0;
 	$con = mysqli_connect('localhost','phpuser','phpwd','parkingmaster');
