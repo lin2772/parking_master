@@ -29,12 +29,20 @@
     <table id="event_bar">
       <tr>
         <td>
+<<<<<<< HEAD
           <form action="newEvent.php" method="post">
+=======
+          <form action="" method="post">
+>>>>>>> e8e5e2c5233771b72b299570c8093c609b56334e
             <input type="submit" value="create new event">
           </form>
         </td>
         <td>
+<<<<<<< HEAD
           <form action="showEvent.php" method="post">
+=======
+          <form action="" method="post">
+>>>>>>> e8e5e2c5233771b72b299570c8093c609b56334e
             <input type="submit" value="current event">
           </form>
         </td>
