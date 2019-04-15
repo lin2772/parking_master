@@ -60,7 +60,7 @@
     <table id= "garage_bar">
       <tr>
         <td>
-          <form action="" method="post">
+          <form action="editSpacePage.php" method="post">
             <input type="submit" value="edit_space">
           </form>
         </td>
