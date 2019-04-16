@@ -28,5 +28,10 @@
       <br><input type="submit" value="Cancel a reservation"></br>
     </form>
   </p>
+  <p>
+    <form action="viewReservations.php" method="post">
+      <br><input type="submit" value="View reservations"></br>
+    </form>
+  </p>
 </body>
 </html>
