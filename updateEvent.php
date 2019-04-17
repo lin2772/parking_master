@@ -16,20 +16,20 @@
 		die('Could not connect'.mysqli_connect_error());
 	}
 
-	$sql_eventid = "SELECT eventid FROM event where eventname = '$EVENTNAME'";
+	$sql_eventid = "select Eventid FROM event where Eventname = '$EVENTNAME'";
 	$result_eventid=mysqli_query($con, $sql_eventid) or die( mysqli_error($con));
 	while($row = mysqli_fetch_array($result_eventid)){
-		$EVENTID=$row['eventid'];
+		$EVENTID=$row['Eventid'];
 	}
 
-	$sql_update = "UPDATE EVENT_DATE set date = '$NEWEVENTDATE'
-	where eventid = '$EVENTID'";
-	echo $EVENTNAME;
-	echo $EVENTID;
-	echo $NEWEVENTDATE;
-	if(mysqli_query($con, $sql_update))
+	$sql_update =  "update event_date set Date='$NEWEVENTDATE' where Eventid = $EVENTID";
+	$sql_result = mysqli_query($con, $sql_update) or die(mysqli_error($con));
+	echo $EVENTNAME.'<br>';
+	echo $EVENTID.'<br>';
+	echo $NEWEVENTDATE.'<br>';
+/*	if(mysqli_query($con, $sql_update))
 	{
 		echo "Event update successfully";
 	}else{
 		echo "ERROR: Event Update Fail";
-	}
+	}*/
