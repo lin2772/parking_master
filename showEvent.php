@@ -1,11 +1,3 @@
-<html>
-<head>
-</head>
-<body>
-	<p>Event</p>
-</body>
-</html>
-
 
 
 <?php
@@ -39,6 +31,10 @@
 		echo "<br>";
 
 	}
+
+
+
+
 
 ?>
 
