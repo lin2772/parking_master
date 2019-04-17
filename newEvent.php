@@ -5,7 +5,7 @@
 
 <body>
 	<br>
-	<p> Add New Event 
+	<p> Add New Event - Step 1 
 		<form action="addEvent.php" method="post">
 
 			Event Name<input name="EventName" type="text"><br>
@@ -22,4 +22,3 @@
 
 
 </html>
-
