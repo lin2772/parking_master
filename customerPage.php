@@ -24,7 +24,7 @@
   </form>
   </p>
   <p>
-    <form action="register.php" method="post">
+    <form action="cancelReservation.php" method="post">
       <br><input type="submit" value="Cancel a reservation"></br>
     </form>
   </p>
