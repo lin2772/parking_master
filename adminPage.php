@@ -1,10 +1,8 @@
 <?php
 
-
-  //var_dump($_GET);
-  $username = $_GET['Username'];
-  $firstname=$_GET['Firstname'];
   session_start();
+  $username = $_SESSION['Username'];
+  $firstname=$_SESSION['Firstname'];
   $_SESSION['login']=$username;
   //  echo $username;
   //echo $firstname;
@@ -29,27 +27,27 @@
     <table id="event_bar">
       <tr>
         <td>
-<<<<<<< HEAD
           <form action="newEvent.php" method="post">
-=======
-            <input type="submit" value="create new event">
+            <input type="submit" value="create new event"><br>
           </form>
         </td>
 
         <td>
-<<<<<<< HEAD
           <form action="updateEventPage.php" method="post">
-=======
           <form action="" method="post">
-            <input type="submit" value="update event">
+            <input type="submit" value="update event"><br>
           </form>
         </td>
 
         <td>
-<<<<<<< HEAD
           <form action="showEvent.php" method="post">
-=======
-            <input type="submit" value="current event">
+            <input type="submit" value="current event"><br>
+          </form>
+        </td>
+
+        <td>
+          <form action="removeEventInput.php" method="post">
+            <input type="submit" value="remove event"><br>
           </form>
         </td>
       </tr>
@@ -72,7 +70,7 @@
     <table id="sumup_bar"></table>
     <tr>
       <th>Reservation Sum Up</th>
-      <th>    
+      <th>
         <form action="ReservationSum.php" method="post">
             <input type="date" name="startdate">
             <input type="date" name="enddate">
@@ -80,7 +78,7 @@
               <option></option>
               <?php
                   if(mysqli_num_rows($result_event)>0){
-   
+
                       while ($row=mysqli_fetch_array($result_event)) {
                             echo "<option value={$row['eventid']}>{$row['eventname']}</option>";
                            }
@@ -91,9 +89,16 @@
         </form>
       </th>
     </tr>
-   
+
   </div>
 
+  <p>
+  <form action="adminReservationSearch.php" method="post">
+    <br> Search for the reservations of a customer:</br>
+    Customer ID: <input name="Cid" type="text"></br>
+    <input type="submit" value="Submit"></br>
+  </form>
+  </p>
 
 </body>
 </html>

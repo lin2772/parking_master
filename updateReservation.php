@@ -58,5 +58,6 @@
    <form action="customerPage.php">
      <br><input type="submit" value="Back to Homepage"></br>
    </form>
+  </p>
  </body>
  </html>
