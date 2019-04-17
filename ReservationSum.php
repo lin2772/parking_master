@@ -8,11 +8,11 @@
     die('Could not connect'.mysqli_connect_error());
   }
   if(empty($EVENT)){
-    $sql_a = "  select garagename,total_reservation,total_space from
+    $sql_a = "  select garagename,t1.garageid, total_reservation, total_revenue, total_space from
     (select * from 
-        (select garage,  SUM(reserve) as total_reservation from 
-        (select reservation.garageid AS garage, reservation.levelnum AS level, count(reservationid) As reserve
-         from reservation join garage_level_event_date 
+        (select garage, SUM(revenue) AS total_revenue, SUM(reserve) as total_reservation from 
+        (select reservation.garageid AS garage, reservation.levelnum AS level, count(reservationid) As reserve, count(reservationid)*price AS revenue 
+         from reservation join garage_level_event_date
          where reservation.garageid=garage_level_event_date.garageid
           and reservation.levelnum=garage_level_event_date.levelnum
           and dateCancelled is null
@@ -26,10 +26,9 @@
           (select garageid, SUM(maxspaces) As total_space
           from garage_level
           group by garageid) as a2
-          on a1.garage = a2.garageid) As t1
-          join 
-          garage as t2 
-          on t1.garageid = t2.garageid";
+          on a1.garage = a2.garageid) as t1
+          join garage as t2
+          on t1.garageid=t2.garageid";
   }
   else{
     $sql_a= " select garagename,t1.garageid, total_reservation, total_revenue, total_space from
@@ -55,6 +54,8 @@
           join garage as t2
           on t1.garageid=t2.garageid";
   }
+  $sql_e = "select * from event where eventid='$EVENT'";
+  $EventName= mysqli_query($con, $sql_e) or die(mysql_error($con));
   $result = mysqli_query($con, $sql_a) or die(mysql_error($con));
 ?>
 
@@ -68,26 +69,22 @@
     <div>   
       <table border="1px" >
         <?php
-          if(empty($EVENT)){
-            echo "<tr><th>Garage</th> <th>Total reservation</th><th>Max capacity</th></tr>";
-            if(mysqli_num_rows($result)>0){
-              while ($row=mysqli_fetch_array($result)) {
-                $revervation = is_null($row['total_reservation'])? 0:$row['total_reservation'];
-                echo "<tr><td>{$row['garagename']}</td><td>$revervation</td><td>{$row['total_space']}</td></tr>";
-              }
+          if(!empty($EVENT)){
+            while ($namerow=mysqli_fetch_array($EventName)) {
+             echo "<h3>EVENT : {$namerow['eventname']}</h3>";
             }
+            
           }
-          else{
-             echo "<tr><th>Garage</th> <th>Total reservation</th><th>Max capacity</th><th>Total revenue</th></tr>";
-             if(mysqli_num_rows($result)>0){
+          echo "<tr><th>Garage</th> <th>Total reservation</th><th>Max capacity</th><th>Total revenue</th></tr>";
+          if(mysqli_num_rows($result)>0){
                 while ($row=mysqli_fetch_array($result)) {
                   $revervation = is_null($row['total_reservation'])? 0:$row['total_reservation'];
                   $revenue = is_null($row['total_revenue'])? 0:$row['total_revenue'];
                   echo "<tr><td>{$row['garagename']}</td><td>$revervation</td><td>{$row['total_space']}</td><td>$revenue</td></tr>";
                 }
-              }
-
           }
+
+          
         ?>
       </table>
     </div>
@@ -99,16 +96,14 @@ select garagename,t1.garageid, total_reservation, total_revenue, total_space fro
     (select * from 
         (select garage, SUM(revenue) AS total_revenue, SUM(reserve) as total_reservation from 
         (select reservation.garageid AS garage, reservation.levelnum AS level, count(reservationid) As reserve, count(reservationid)*price AS revenue 
-         from reservation join garage_level_event_date join event
+         from reservation join garage_level_event_date
          where reservation.garageid=garage_level_event_date.garageid
           and reservation.levelnum=garage_level_event_date.levelnum
           and dateCancelled is null
           and reservation.eventid=garage_level_event_date.eventid
-          and event.eventname ='FinalExam'
-          and event.eventid = reservation.eventid
           and reservation.date=garage_level_event_date.date
-          and dateReserved<='2019-03-09'
-          and dateReserved>='2019-03-06'
+          and dateReserved<='2019-05-11'
+          and dateReserved>='2019-05-10'
           GROUP BY garage, level) AS layer1
           Group BY garage) as a1
           right join
