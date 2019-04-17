@@ -2,9 +2,10 @@
 
 
   //var_dump($_GET);
-  $username = $_GET['Username'];
-  $firstname=$_GET['Firstname'];
+
   session_start();
+  $username = $_SESSION['Username'] ;
+  $firstname=$_SESSION['Firstname'];
   $_SESSION['login']=$username;
   //  echo $username;
   //echo $firstname;
@@ -24,7 +25,7 @@
   </form>
   </p>
   <p>
-    <form action="register.php" method="post">
+    <form action="cancelReservation.php" method="post">
       <br><input type="submit" value="Cancel a reservation"></br>
     </form>
   </p>

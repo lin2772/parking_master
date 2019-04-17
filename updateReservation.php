@@ -5,9 +5,10 @@
   $EVENTID=$_SESSION['EventID'];
   $DATE=$_SESSION['Date'];
   $GARAGEID=$_SESSION['GarageID'];
-  $STATUS='Reserved';
+  $STATUS='active';
   $DATERESERVED=date('Y-m-d');
   $RESERVATIONID=0;
+
   $con = mysqli_connect('localhost','phpuser','phpwd','parkingmaster');
 	If (!$con)
 	{
@@ -37,6 +38,16 @@
   }else{
     echo "Error in reserving parking space. <br>";
   }
+  $username='';
+  $firstname='';
+  $sql_username ="select Login,Fname from CUSTOMER where Cid = '$CUSTOMERID'";
+  $result_username=mysqli_query($con, $sql_username) or die(mysqli_error($con));
+  while($row = mysqli_fetch_array($result_username)){
+    $username = $row['Login'];
+    $firstname=$row['Fname'];
+  }
+  $_SESSION['Username'] = $username;
+  $_SESSION['Firstname'] = $firstname;
  ?>
  <html>
  <head>

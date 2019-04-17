@@ -25,11 +25,14 @@
 						While ( $row = mysqli_fetch_array($result_firstname)){
 							//echo $row['Fname'];
 							$FIRSTNAME = $row['Fname'];
+							session_start();
+						  $_SESSION['Username'] = $USERNAME;
+						  $_SESSION['Firstname'] = $FIRSTNAME;
 							if(!($ADMIN)){
-							header("location:customerPage.php? Username=$USERNAME&Firstname=$FIRSTNAME");
+								header("location:customerPage.php");
 							}
 							else{
-								header("location:adminPage.php? Username=$USERNAME&Firstname=$FIRSTNAME");
+								header("location:adminPage.php");
 							}
 						}
 			      //echo "Welcome ",$USERNAME;
