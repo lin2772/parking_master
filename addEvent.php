@@ -7,6 +7,7 @@
 	$EVENTNAME = $_POST["EventName"];
 	$VENUENAME = $_POST["VenueName"];
 	$EVENTDATE = $_POST["EventDate"];
+//	$EVENTID=-1;
 //	$CAPACITY = $_POST["Capacity"];
 //	$PRICE = $_POST["Price"];
 	$VENUEID = -1;
@@ -62,7 +63,7 @@
 //	echo $EVENTDATE;
 	$sql_insert = "insert into EVENT_DATE values ('$EVENTID','$EVENTDATE')";
 	if(mysqli_query($con,$sql_insert)){
-    $sql_gl='select Garageid,Levelnum,Eventid,Date from GARAGE_LEVEL,EVENT_DATE';
+    $sql_gl="select Garageid,Levelnum,Eventid,Date from GARAGE_LEVEL,EVENT_DATE where Eventid = '$EVENTID' and Date = '$EVENTDATE'";
 		$result_gl=mysqli_query($con, $sql_gl) or die( mysqli_error($con));
 
 		$index = 0;

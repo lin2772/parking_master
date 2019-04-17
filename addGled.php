@@ -23,9 +23,9 @@
     $CapacityAllocated=$tuple[4];
     $PRICE=$tuple[5];
     $sql_insert = "insert into GARAGE_LEVEL_EVENT_DATE values ('$GARAGEID','$LEVELNUM','$EVENTID','$DATE','$CapacityAllocated','$PRICE')";
-  /*	if(!mysqli_query($con,$sql_insert)){
+  	if(!mysqli_query($con,$sql_insert)){
       echo "Error in adding record for garageid, levelnum, eventid, date.";
-    }*/
+    }
   }
 
 
