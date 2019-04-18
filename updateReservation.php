@@ -24,7 +24,7 @@
       break;
     }
   }
-  $sql_update_space="update GARAGE_LEVEL_EVENT_DATE set CapacityAllocated = CapacityAllocated + 1 where Garageid='$GARAGEID' and Levelnum='$LEVELNUM' and Eventid='$EVENTID' and Date='$DATE'";
+  $sql_update_space="update GARAGE_LEVEL_EVENT_DATE set CapacityAllocated = CapacityAllocated - 1 where Garageid='$GARAGEID' and Levelnum='$LEVELNUM' and Eventid='$EVENTID' and Date='$DATE'";
   if(mysqli_query($con,$sql_update_space)){
     echo "available parking space - 1. <br>";
   }else{
