@@ -9,17 +9,17 @@
   }
   if(empty($EVENT)){
     $sql_a = "  select garagename,t1.garageid, total_reservation, total_revenue, total_space from
-    (select * from 
-        (select garage, SUM(revenue) AS total_revenue, SUM(reserve) as total_reservation from 
-        (select reservation.garageid AS garage, reservation.levelnum AS level, count(reservationid) As reserve, count(reservationid)*price AS revenue 
+    (select * from
+        (select garage, SUM(revenue) AS total_revenue, SUM(reserve) as total_reservation from
+        (select reservation.garageid AS garage, reservation.levelnum AS level, count(reservationid) As reserve,  sum(price) AS revenue
          from reservation join garage_level_event_date
          where reservation.garageid=garage_level_event_date.garageid
           and reservation.levelnum=garage_level_event_date.levelnum
           and dateCancelled is null
           and reservation.eventid=garage_level_event_date.eventid
           and reservation.date=garage_level_event_date.date
-          and dateReserved<='$END'
-          and dateReserved>='$START'
+          and reservation.date<='$END'
+          and reservation.date>='$START'
           GROUP BY garage, level) AS layer1
           Group BY garage) as a1
           right join
@@ -32,9 +32,9 @@
   }
   else{
     $sql_a= " select garagename,t1.garageid, total_reservation, total_revenue, total_space from
-    (select * from 
-        (select garage, SUM(revenue) AS total_revenue, SUM(reserve) as total_reservation from 
-        (select reservation.garageid AS garage, reservation.levelnum AS level, count(reservationid) As reserve, count(reservationid)*price AS revenue 
+    (select * from
+        (select garage, SUM(revenue) AS total_revenue, SUM(reserve) as total_reservation from
+        (select reservation.garageid AS garage, reservation.levelnum AS level, count(reservationid) As reserve, sum(price) AS revenue
          from reservation join garage_level_event_date
          where reservation.garageid=garage_level_event_date.garageid
           and reservation.levelnum=garage_level_event_date.levelnum
@@ -42,8 +42,8 @@
           and reservation.eventid=garage_level_event_date.eventid
           and reservation.eventid = '$EVENT'
           and reservation.date=garage_level_event_date.date
-          and dateReserved<='$END'
-          and dateReserved>='$START'
+          and reservation.date<='$END'
+          and reservation.date>='$START'
           GROUP BY garage, level) AS layer1
           Group BY garage) as a1
           right join
@@ -66,14 +66,14 @@
 <body>
     <h2>Reservation Sum up</h2>
     <h3>Time Period <?php echo $START, " to ", $END?></h3>
-    <div>   
+    <div>
       <table border="1px" >
         <?php
-          if(!empty($EVENT)){
+          if(!empty($EventName)){
             while ($namerow=mysqli_fetch_array($EventName)) {
              echo "<h3>EVENT : {$namerow['eventname']}</h3>";
             }
-            
+
           }
           echo "<tr><th>Garage</th> <th>Total reservation</th><th>Max capacity</th><th>Total revenue</th></tr>";
           if(mysqli_num_rows($result)>0){
@@ -84,7 +84,7 @@
                 }
           }
 
-          
+
         ?>
       </table>
     </div>
@@ -93,17 +93,17 @@
 
 <!--
 select garagename,t1.garageid, total_reservation, total_revenue, total_space from
-    (select * from 
-        (select garage, SUM(revenue) AS total_revenue, SUM(reserve) as total_reservation from 
-        (select reservation.garageid AS garage, reservation.levelnum AS level, count(reservationid) As reserve, count(reservationid)*price AS revenue 
+    (select * from
+        (select garage, SUM(revenue) AS total_revenue, SUM(reserve) as total_reservation from
+        (select reservation.garageid AS garage, reservation.levelnum AS level, count(reservationid) As reserve, sum(price) AS revenue
          from reservation join garage_level_event_date
          where reservation.garageid=garage_level_event_date.garageid
           and reservation.levelnum=garage_level_event_date.levelnum
           and dateCancelled is null
           and reservation.eventid=garage_level_event_date.eventid
           and reservation.date=garage_level_event_date.date
-          and dateReserved<='2019-05-11'
-          and dateReserved>='2019-05-10'
+          and reservation.date<='2019-05-11'
+          and reservation.date>='2019-05-10'
           GROUP BY garage, level) AS layer1
           Group BY garage) as a1
           right join
