@@ -1,6 +1,7 @@
 <?php
 	session_start();
 	$USERNAME = $_SESSION["login"];
+	$OLDEVENTDATE=$_POST['OldEventDate'];
 	$EVENTNAME = $_POST["OldEventName"];
 	$NEWEVENTDATE = $_POST["NewEventDate"];
 	$EVENTID=-1;
@@ -22,14 +23,14 @@
 		$EVENTID=$row['Eventid'];
 	}
 
-	$sql_update =  "update event_date set Date='$NEWEVENTDATE' where Eventid = $EVENTID";
-	$sql_result = mysqli_query($con, $sql_update) or die(mysqli_error($con));
+	$sql_update = "update event_date set Date='$NEWEVENTDATE' where Eventid = $EVENTID and Date='$OLDEVENTDATE'";
+	/*$sql_result = mysqli_query($con, $sql_update) or die(mysqli_error($con));
 	echo $EVENTNAME.'<br>';
 	echo $EVENTID.'<br>';
-	echo $NEWEVENTDATE.'<br>';
-/*	if(mysqli_query($con, $sql_update))
+	echo $NEWEVENTDATE.'<br>';*/
+	if(mysqli_query($con, $sql_update))
 	{
 		echo "Event update successfully";
 	}else{
 		echo "ERROR: Event Update Fail";
-	}*/
+	}
