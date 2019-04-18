@@ -9,8 +9,8 @@
 	$DATE = $_POST["Date"];
 
 	$PRICE = $_POST["Price"];
-	$GARAGEID;
-	$EVENTID;
+	$GARAGEID=-1;
+	$EVENTID=-1;
 
 	if(empty($GARAGENAME) || empty($LEVELNUM) || empty($EVENTNAME) || empty($DATE) || empty($PRICE))
 	{
@@ -30,15 +30,15 @@
     	$GARAGEID = $row['garageid'];
     }
 
-    $sql_eventid = "SELECT eventid from event natural join event_date where (eventname ='$EVENTNAME' and date = '$DATE')";
+    $sql_eventid = "SELECT event.eventid from event, event_date where event.eventname ='$EVENTNAME' and event_date.date = '$DATE'";
     $result_eventid = mysqli_query($con, $sql_eventid) or die(mysqli_error($con));
 	While($row = mysqli_fetch_array($result_eventid))
     {
     	$EVENTID = $row['eventid'];
     }
 
-	$sql_update_price = "UPDATE garage_level_event_date SET price = $PRICE where (garageid = $GARAGEID AND levelnum = $LEVELNUM AND eventid = $EVENTID AND date = $DATE)";
-	$result_eventid = mysqli_query($con, $sql_eventid) or die(mysqli_error($con));
+	$sql_update_price = "UPDATE garage_level_event_date SET price = '$PRICE' where garageid = '$GARAGEID' AND levelnum = '$LEVELNUM' AND eventid = '$EVENTID' AND date = '$DATE'";
+	$result_update_price = mysqli_query($con, $sql_update_price) or die(mysqli_error($con));
 	if(mysqli_query($con, $sql_update_price)){
 		echo "Price updated successful";
 	}else{
