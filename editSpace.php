@@ -20,21 +20,20 @@
 
     $sql_garageid = "SELECT garageid from GARAGE where garagename='$GARAGENAME'";
     $result_garageid = mysqli_query($con, $sql_garageid) or die(mysqli_error($con));
+    While($row = mysqli_fetch_array($result_garageid))
+    {
+    	$GARAGEID = $row['garageid'];
+    }
 
-    if( mysqli_num_rows($result_garageid)>0){
-    	$row=mysqli_fetch_array($result_garageid);
-    	$sql_update = "UPDATE GARAGE SET vip_space = '$NEWVIPSPACES' WHERE garageid = {$row['garageid']}";
+	$sql_update = "UPDATE GARAGE_LEVEL SET VIPSPACES = $NEWVIPSPACES
+	WHERE garageid = '$GARAGEID'";
 
-		if(mysqli_query($con,$sql_update)){
+	if(mysqli_query($con,$sql_update))
+	{
 		echo "VIP Spaces updated successfully";
-		}else{
+	}else{
 		echo "ERROR: Space Edits Fail";
-		}
-
 	}
-	else{
-		die(header('refresh: 3; url=editSpace.php').'Invalid Input, wait 3 seconds or just click <a href="editSpace.php">HERE</a> to update again.');
 
-	}
+	
 ?>	
-

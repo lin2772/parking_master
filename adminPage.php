@@ -67,25 +67,12 @@
     <br><br>
   </div>
 
-  <div>
-    <table id= "garage_level_event_date">
-      <tr>
-        <td>
-          <form action="update_gled_page.php" method="post">
-            <input type="submit" value="Add Garage Info">
-          </form>
-        </td>
-      </tr>
-    </table>
-    <br><br>
-  </div
-
     <div>
     <table id= "garage_level_event_date_info">
       <tr>
         <td>
-          <form action="update_gled_info_page.php" method="post">
-            <input type="submit" value="Update Garage Info">
+          <form action="update_price_page.php" method="post">
+            <input type="submit" value="Update Price">
           </form>
         </td>
       </tr>

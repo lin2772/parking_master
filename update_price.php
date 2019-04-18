@@ -12,7 +12,7 @@
 	$GARAGEID;
 	$EVENTID;
 
-	if(empty($GARAGENAME) || empty($LEVELNUM) || empty($EVENTNAME) || empty($DATE) || empty($CAPACITY) || empty($PRICE))
+	if(empty($GARAGENAME) || empty($LEVELNUM) || empty($EVENTNAME) || empty($DATE) || empty($PRICE))
 	{
 		echo "Missing information!";
 	}
@@ -38,6 +38,7 @@
     }
 
 	$sql_update_price = "UPDATE garage_level_event_date SET price = $PRICE where (garageid = $GARAGEID AND levelnum = $LEVELNUM AND eventid = $EVENTID AND date = $DATE)";
+	$result_eventid = mysqli_query($con, $sql_eventid) or die(mysqli_error($con));
 	if(mysqli_query($con, $sql_update_price)){
 		echo "Price updated successful";
 	}else{
